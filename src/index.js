@@ -5,7 +5,8 @@ const defaultOptions = {
 	width: undefined,
 	height: undefined,
 	Canvas: undefined,
-	crossOrigin: undefined
+	crossOrigin: undefined,
+	scale: undefined,
 };
 
 // Return Promise
@@ -45,6 +46,9 @@ const mergeImages = (sources = [], options = {}) => new Promise(resolve => {
 			// Draw images to canvas
 			images.forEach(image => {
 				ctx.globalAlpha = image.opacity ? image.opacity : 1;
+				cts.setTransform(
+					image.scale ? image.scale : 1, 0, 0, 
+					image.scale ? image.scale : 1, 0, 0);
 				return ctx.drawImage(image.img, image.x || 0, image.y || 0);
 			});
 
